@@ -15,18 +15,17 @@ node.set[:ebs][:raids].each do |raid_device, options|
     BlockDevice::wait_for(disk_device)
   end
 
-  execute 'mkfs' do
-    command "test $(blkid -s TYPE -o value #{a_lvm_device}) = #{options[:fstype]} || mkfs -t #{options[:fstype]} #{a_lvm_device}"
+  execute "mkfs for #{raid_device}" do
+    command "test $(blkid -s TYPE -o value #{BlockDevice.lvm_device(raid_device)}) = #{options[:fstype]} || mkfs -t #{options[:fstype]} #{BlockDevice.lvm_device(raid_device)}"
     action :nothing
   end
 
   ruby_block "Create or attach LVM volume out of #{raid_device}" do
     block do
       BlockDevice.create_lvm(raid_device, options)
- 	  a_lvm_device = BlockDevice.lvm_device(raid_device)
     end
     action :nothing
-    notifies :run, "execute[mkfs]", :immediately
+    notifies :run, "execute[mkfs for #{raid_device}]", :immediately
   end
 
   ruby_block "Create or resume RAID array #{raid_device}" do
