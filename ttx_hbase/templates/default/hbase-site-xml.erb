@@ -28,7 +28,7 @@
 
   	<property>
     	<name>hbase.zookeeper.property.dataDir</name>
-    	<value><%= node[:ttx_hbase][:zookeeper][:data_dir] %></value>
+    	<value><%= node[:ttx_hbase][:zookeeper][:data_dir].join(",") %></value>
   	</property>
 
   	<property>

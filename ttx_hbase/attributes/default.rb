@@ -23,8 +23,8 @@ default[:ttx_hbase][:java][:home] = ENV['JAVA_HOME'] || '/usr/java/jdk1.7.0'
 # hadoop env
 default[:ttx_hbase][:hadoop][:home] = '/usr/local/hadoop'
 default[:ttx_hbase][:hadoop][:conf] = "#{node[:ttx_hbase][:system][:config_root_dir]}/hadoop"
-default[:ttx_hbase][:hadoop][:name_dir] = '/var/hadoop/dfs/name'
-default[:ttx_hbase][:hadoop][:data_dir] = '/var/hadoop/dfs/data'
+default[:ttx_hbase][:hadoop][:name_dir] = ['/var/hadoop/dfs/name']
+default[:ttx_hbase][:hadoop][:data_dir] = ['/var/hadoop/dfs/data']
 default[:ttx_hbase][:hadoop][:tmp_dir] = '/var/hadoop/tmp'
 default[:ttx_hbase][:hadoop][:pid_dir] = '/var/hadoop/pid'
 default[:ttx_hbase][:hadoop][:log_dir] = '/var/log/hadoop'
@@ -53,7 +53,7 @@ default[:ttx_hbase][:hbase][:_root_dir] = "#{node[:ttx_hbase][:hadoop][:_fs_name
 default[:ttx_hbase][:regionserver][:handler_count] = 100
 
 # zookeeper
-default[:ttx_hbase][:zookeeper][:data_dir] = '/var/zookeeper/data'
+default[:ttx_hbase][:zookeeper][:data_dir] = ['/var/zookeeper/data']
 default[:ttx_hbase][:zookeeper][:quorum] = ['localhost']
 
 # execution tuning

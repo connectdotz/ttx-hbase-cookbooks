@@ -6,11 +6,11 @@
 <configuration>
     <property>
          <name>dfs.name.dir</name>
-         <value><%= node[:ttx_hbase][:hadoop][:name_dir] %></value>
+         <value><%= node[:ttx_hbase][:hadoop][:name_dir].join(",") %></value>
     </property>
     <property>
          <name>dfs.data.dir</name>
-         <value><%= node[:ttx_hbase][:hadoop][:data_dir] %></value>
+         <value><%= node[:ttx_hbase][:hadoop][:data_dir].join(",") %></value>
     </property>
     <property>
          <name>dfs.replication</name>
